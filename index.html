@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Faizan Enterprise - Unified Smart Platform</title>
+    <!-- STABLE PRODUCTION HTML5 QRCODE SCANNING HARDWARE ENGINE CDN -->
+    <script src="https://cloudflare.com"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: #f1f5f9; color: #0f172a; padding-bottom: 90px; }
+        
+        /* Premium Enterprise Header Banner Layout */
+        .shop-banner { background: linear-gradient(135deg, #1e3a8a, #0f766e); color: white; padding: 35px 15px; text-align: center; border-bottom: 5px solid #10b981; position: relative; }
+        .shop-banner h1 { font-size: 28px; font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 0.5px; }
+        .shop-banner p { font-size: 11px; opacity: 0.9; margin-top: 5px; line-height: 1.4; }
+        .shop-banner .slogan { font-style: italic; font-size: 13px; color: #a7f3d0; margin-top: 4px; font-weight: bold; }
+        .banner-logo { font-size: 45px; margin-bottom: 5px; display: inline-block; transition: transform 0.3s; }
+        .banner-logo:hover { transform: scale(1.1); }
+        
+        .role-indicator { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.5); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .lang-switcher { position: absolute; top: 15px; right: 15px; background: #10b981; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        
+        /* Master Panel View Switcher Bars Layout */
+        .nav-bar { background: #1e293b; padding: 10px; display: flex; justify-content: flex-start; gap: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; position: sticky; top: 0; z-index: 1000; }
+        .nav-tab { color: white; text-decoration: none; font-weight: bold; font-size: 12px; padding: 10px 15px; border-radius: 6px; background: rgba(255,255,255,0.1); cursor: pointer; border: none; outline: none; display: inline-block; transition: background 0.2s; }
+        .nav-tab.active { background: #10b981; box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); }
+        .nav-tab.admin-btn { background: #475569; border: 1px solid #10b981; margin-left: auto; }
+        
+        .container { padding: 12px; max-width: 650px; margin: 0 auto; }
+        .card { background: white; padding: 16px; border-radius: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); margin-bottom: 14px; border: 1px solid rgba(0,0,0,0.03); position: relative; overflow: hidden; }
+        .card-title { font-size: 15px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; margin-bottom: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .input-row { display: flex; gap: 8px; margin-bottom: 8px; }
+        input, select, textarea, button { padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; background: white; color: #0f172a; width: 100%; margin-bottom: 8px; outline: none; transition: border-color 0.2s; }
+        input:focus, select:focus, textarea:focus { border-color: #10b981; }
+        
+        .btn-action { background: #10b981; color: white; font-weight: bold; border: none; cursor: pointer; text-transform: uppercase; text-align: center; display: block; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); width: 100%; }
+        .btn-action:active { transform: scale(0.98); }
+        .btn-danger { background: #ef4444; color: white; border: none; padding: 6px 12px; width: auto; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .btn-secondary { background: #64748b; color: white; border: none; cursor: pointer; font-weight: bold; }
+        
+        /* Interactive Catalog Layout Engine */
+        .grid-catalog { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .grid-item { border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; text-align: center; position: relative; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+        .grid-item:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .item-img-placeholder { font-size: 44px; margin-bottom: 8px; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .flash-badge { position: absolute; top: 8px; right: 8px; background: #ef4444; color: white; font-size: 9px; padding: 4px 8px; border-radius: 6px; font-weight: bold; animation: pulse 1.5s infinite; letter-spacing: 0.5px; }
+        
+        /* Loyalty Perks Dashboard aesthetics */
+        .loyalty-card { background: linear-gradient(135deg, #1e1b4b, #311042); color: #fef08a; padding: 18px; border-radius: 12px; border: 1px solid #eab308; margin-bottom: 12px; }
+        .tier-indicator { background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; display: inline-block; margin-top: 5px; }
+        .perks-list { margin-top: 10px; font-size: 11px; color: #e2e8f0; list-style-type: none; }
+        .perks-list li { margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
+        
+        /* Stats layouts */
+        .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+        .stat-box { background: #eff6ff; padding: 14px; border-radius: 10px; text-align: center; border: 1px solid #bfdbfe; }
+        .stat-box h3 { font-size: 18px; color: #1e3a8a; }
+        .stat-box p { font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: bold; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 5px; }
+        th, td { border-bottom: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+        th { background-color: #f8fafc; font-weight: bold; color: #1e3a8a; }
+        
+        .hidden { display: none !important; }
+        body.lang-en .bn-txt { display: none !important; }
+        body.lang-bn .en-txt { display: none !important; }
+        
+        #camera-preview { width: 100%; height: 220px; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 10px; border: 2px solid #cbd5e1; }
+        .list-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; align-items: center; font-size: 14px; }
+        
+        /* Floating Shortcuts Footer */
+        .floating-footer { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 1px solid #e2e8f0; padding: 10px; display: flex; justify-content: space-around; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 999; }
+        .footer-item { text-align: center; text-decoration: none; color: #64748b; font-size: 11px; font-weight: bold; flex: 1; cursor: pointer; background: none; border: none; margin: 0; padding: 0; width: auto; }
+        .footer-item i { display: block; font-size: 22px; margin-bottom: 3px; }
+        .footer-item.active-foot { color: #10b981; }
+
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+    </style>
+</head>
+<body class="lang-bn">
+
+    <!-- Header Banner UI Panel Layout -->
+    <div class="shop-banner" id="liveShopBanner">
+        <span class="role-indicator" id="roleLabel">🌐 Public Store</span>
+        <button class="lang-switcher" onclick="toggleLanguage()">EN / বাংলা</button>
+        <div class="banner-logo" id="lblLogo">🏪</div>
+        <h1 id="lblStoreName">FAIZAN-ENTERPRISE</h1>
+        <div class="slogan" id="lblSlogan">"Your Trusted Partner for Commerce & Loyalty"</div>
+        <p id="lblMetadata">📍 Kunia-Pasar, TARGAS, Gazipur City Corporation, Dhaka, Bangladesh | 📞 +8801642001334</p>
+    </div>
+
+    <!-- Navigation Switcher System -->
+    <div class="nav-bar" id="masterNavMenu">
+        <button class="nav-tab active customer-ui" id="btn-STORE" onclick="switchView('STORE')">🛍️ <span class="en-txt">E-Shop</span><span class="bn-txt">অনলাইন শপ</span></button>
+        <button class="nav-tab customer-ui" id="btn-CART" onclick="switchView('CART')">🛒 <span class="en-txt">Cart (<span class="cart-cnt">0</span>)</span><span class="bn-txt">ব্যাগ (<span class="cart-cnt">0</span>)</span></button>
+        <button class="nav-tab customer-ui" id="btn-LOYALTY" onclick="switchView('LOYALTY')">👑 <span class="en-txt">Club Rewards</span><span class="bn-txt">মেম্বারশিপ ক্লাব</span></button>
+        
+        <!-- Private Administration Views -->
+        <button class="nav-tab hidden admin-ui" id="btn-POS" onclick="switchView('POS')">⚙️ <span class="en-txt">POS Desk</span><span class="bn-txt">কাউন্টার সেল</span></button>
+        <button class="nav-tab hidden admin-ui" id="btn-STOCK" onclick="switchView('STOCK')">📦 <span class="en-txt">Inventory</span><span class="bn-txt">স্টক প্যানেল</span></button>
+        <button class="nav-tab hidden admin-ui" id="btn-CUSTOMERS" onclick="switchView('CUSTOMERS')">👥 <span class="en-txt">Ledger</span><span class="bn-txt">বাকি খাতা</span></button>
+        <button class="nav-tab hidden admin-ui" id="btn-SETTINGS" onclick="switchView('SETTINGS')">🎨 <span class="en-txt">Branding</span><span class="bn-txt">ট্যাগ এডিট</span></button>
+        
+        <button class="nav-tab admin-btn" id="portalSwitcherBtn" onclick="togglePlatformRole()">🔐 Staff Login</button>
+    </div>
+
+    <div class="container">
+
+        <!-- PANEL 1: PUBLIC GENERAL COMMERCE E-SHOP -->
+        <div id="panel-STORE" class="view-panel">
+            <div class="card" id="salePromoAlertBox" style="background: linear-gradient(135deg, #fef08a, #fde047); border-left: 5px solid #eab308;">
+                <b id="lblSaleTitle" style="color: #854d0e; font-size: 14px;">⚡ FRIDAY BIG SALE IS ACTIVE:</b>
+                <p id="lblSaleText" style="font-size: 11px; color: #713f12; margin-top: 2px;">Enjoy exclusive point multipliers & drop shipping markdown rules right now!</p>
+            </div>
+            
+            <!-- User Status Card Component -->
+            <div class="card" id="userCreditModeBanner" style="background:#f3e8ff; border-left:5px solid #8b5cf6; display:none;">
+                <b style="color:#6b21a8; font-size:13px;">📝 SIGNED IN VIA ENTERPRISE CREDIT ACCOUNT</b>
+                <p style="font-size:11px; color:#581c87;">Standard trade discounts and flash alerts hidden under secure internal policies.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span><span class="en-txt">Premium Retail Catalogue</span><span class="bn-txt">পণ্য সামগ্রী ভান্ডার</span></span>
+                    <select id="filterCreditUserSelect" style="width:auto; margin:0; padding:4px 8px; font-size:11px;" onchange="applyUserContextFiltering(this.value)">
+                        <option value="CASH">Walk-in Buyer (ক্যাশ কাস্টমার)</option>
+                        <option value="CREDIT">Credit Ledger Profile (বাকি কাস্টমার)</option>
+                    </select>
+                </div>
+                <div class="grid-catalog" id="publicCatalogGrid"></div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: INTELLIGENT COMMERCE CART AND LOGISTICS CONSOLE -->
+        <div id="panel-CART" class="view-panel hidden">
+            <div class="card">
+                <div class="card-title"><span class="en-txt">Your Selected Cart Items</span><span class="bn-txt">আপনার শপিং ব্যাগ</span></div>
+                <div id="cartItemsList"></div>
+                
+                <div style="margin-top:15px; font-weight: bold; border-top: 2px dashed #cbd5e1; padding-top: 10px;">
+                    <div class="list-row"><span>Subtotal (সাবটোটাল):</span><span>৳<span id="cartSubtotal">0</span></span></div>
+                    <div class="list-row">
+                        <span>Fulfillment Logistics (ডেলিভারি মাধ্যম):</span>
+                        <select id="shippingMethodSelect" style="width:auto; margin:0; padding:6px;" onchange="recalculateCartTotals()">
+                            <option value="COD">Home Delivery Inside Gazipur (৳60)</option>
+                            <option value="PICKUP">Store Self-Pickup (৳0)</option>
+                        </select>
+                    </div>
+                    <div class="list-row" style="color:#1e3a8a; font-size:16px;"><span>Grand Total (সর্বমোট বিল):</span><span>৳<span id="cartGrandTotal">0</span></span></div>
+                </div>
+                
+                <div style="margin-top:15px;">
+                    <input type="text" id="custOrderName" placeholder="Your Name / আপনার নাম">
+                    <input type="text" id="custOrderPhone" placeholder="Mobile Number / মোবাইল নম্বর">
+                    <textarea id="custOrderAddress" placeholder="Full Delivery Address / ডেলিভারি ঠিকানা" rows="2"></textarea>
+                    
+                    <div class="input-row" style="margin-top:5px;">
+                        <button class="btn-action" style="background:#25d366;" onclick="checkoutOrderRoute('WHATSAPP')">💬 Order via WhatsApp</button>
+                        <button class="btn-action" style="background:#0f766e;" onclick="checkoutOrderRoute('COD')">📦 Cash On Delivery</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 3: GAMIFIED RETAIL LOYALTY CLUB HUB -->
+        <div id="panel-LOYALTY" class="view-panel hidden">
+            <div class="loyalty-card">
+                <h3>👑 FAIZAN PRIVILEGE CLUB</h3>
+                <p style="font-size:12px; opacity:0.9; margin-top:2px;">Shop regularly to secure premium membership badges and auto vouchers.</p>
+                
+                <div style="margin:15px 0; background:rgba(255,255,255,0.1); padding:12px; border-radius:8px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>Current Profile Standing:</span>
+                        <span class="tier-indicator" id="lblUserTierBadge">Bronze Member</span>
+                    </div>
+                    <div style="font-size:22px; font-weight:900; margin-top:5px;">⭐ <span id="lblUserPointsDisplay">0</span> Points</div>
+                </div>
+                
+                <b style="font-size:12px; color:#fef08a;">✨ HOW MEMBERSHIP REWARDS ENGAGEMENT WORKS:</b>
+                <ul class="perks-list">
+                    <li>✅ Earn 1 Loyalty Point for every ৳100 spent inside active processing nodes.</li>
+                    <li>✅ 100 Points auto-locks <b>Gold Status</b>: Unlocks 2% flat storewide discount markdown.</li>
+                    <li>✅ 300 Points upgrades to <b>Platinum Status</b>: Free Gazipur shipping + 5% cashback logic nodes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PANEL 4: PROFESSIONAL POS HARDWARE COUNTER TERMINAL -->
+        <div id="panel-POS" class="view-panel hidden">
+            <div class="card">
+                <div class="card-title"><span class="en-txt">Mobile Optical Scanner Array</span><span class="bn-txt">মোবাইল কাস্টম ক্যামেরা স্ক্যানার</span></div>
+                <div id="camera-preview"></div>
+                <div class="input-row">
+                    <button class="btn-action" style="background:#475569;" onclick="startHardwareCameraStream()">Activate Video Node</button>
+                    <button class="btn-danger" onclick="stopHardwareCameraStream()">Kill Camera Feed</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title"><span class="en-txt">Active Checkout Counter Invoice</span><span class="bn-txt">চলতি কাস্টমার ইনভয়েস</span></div>
+                <div id="posCartTerminalListing"></div>
+                <button class="btn-action" style="background:#0f766e; margin-top:15px;" onclick="finalizePosCashReceipt()">Instantly Log Order Receipt</button>
+            </div>
+        </div>
+
+        <!-- PANEL 5: ENTERPRISE STRUCTURAL INVENTORY MANAGER -->
+        <div id="panel-STOCK" class="view-panel hidden">
+            <div class="card">
+                <div class="card-title"><span class="en-txt">Register New Stock Entity</span><span class="bn-txt">নতুন পণ্য যুক্ত করুন</span></div>
+                <input type="text" id="formProdName" placeholder="Product Name / পণ্যের নাম (e.g. Miniket Rice 5kg)">
+                <div class="input-row">
+                    <input type="number" id="formProdPrice" placeholder="Base Cash Price (৳)">
+                    <input type="number" id="formProdStock" placeholder="Inventory Count">
+                </div>
+                <div class="input-row">
+                    <input type="text" id="formProdBarcode" placeholder="Barcode SKU Value">
+                    <select id="formProdIcon">
+                        <option value="🌾">🌾 Rice / Grains</option>
+                        <option value="🍾">🍾 Oils / Liquids</option>
+                        <option value="🧂">🧂 Confectionery / Spices</option>
+                        <option value="🧼">🧼 Cleaners / Toiletries</option>
+                        <option value="📦">📦 Other General Commodities</option>
+                    </select>
+                </div>
+                <button class="btn-action" onclick="submitProductToInventoryArray()">Append Secure Product Node</button>
+            </div>
+            
+            <div class="card">
+                <div class="card-title"><span class="en-txt">Warehouse Master Sheet Data</span><span class="bn-txt">গুদাম স্টক রেজিস্টার খাতা</span></div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr><th>Item</th><th>Base Cash</th><th>Stock</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="masterInventoryTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 6: CREDIT CUSTOMERS ACCOUNT KHATA BOOK -->
+        <div id="panel-CUSTOMERS" class="view-panel hidden">
+            <div class="card">
+                <div class="card-title"><span class="en-txt">Register Credit Ledger Account</span><span class="bn-txt">নতুন বাকি কাস্টমার খাতা খুলুন</span></div>
+                <input type="text" id="formAccName" placeholder="Customer Full Name / খাতার নাম">
+                <input type="text" id="formAccPhone" placeholder="Mobile Number / ফোন নম্বর">
+                <div class="input-row">
+                    <input type="number" id="formAccPremium" placeholder="Hidden Markup Percentage (e.g. 5 for +5%)" value="5">
+                    <input type="number" id="formAccBalance" placeholder="Starting Balance / পূর্বের বাকি (৳)" value="0">
+                </div>
+                <button class="btn-action" style="background:#8b5cf6;" onclick="createNewCreditAccountNode()">Create Account Ledger</button>
+            </div>
+            
+            <div class="card">
+                <div class="card-title"><span class="en-txt">Active Outstanding Ledger Balances</span><span class="bn-txt">গ্রাহক বাকি খাতা ব্যালেন্স</span></div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr><th>Customer Name</th><th>Markup %</th><th>Balance</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="masterCreditLedgerTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 7: REAL-TIME CUSTOM BRANDING SYSTEM TAG EDITOR -->
+        <div id="panel-SETTINGS" class="view-panel hidden">
+            <div class="card" style="border-top:5px solid #10b981;">
+                <div class="card-title"><span class="en-txt">Dynamic Theme Configuration Engine</span><span class="bn-txt">ব্র্যান্ডিং ও ব্যানার ট্যাগ এডিটর</span></div>
+                <p style="font-size:12px; color:#64748b; margin-bottom:10px;">Modify metadata elements on-the-fly without diving into source code blocks.</p>
+                
+                <label style="font-weight:bold; font-size:12px;">Enterprise Logo Emoji (লোগো ইমোজি):</label>
+                <input type="text" id="cfgLogo" value="🏪" oninput="liveUpdateBrandMetadata()">
+                
+                <label style="font-weight:bold; font-size:12px;">Store Name Tag (প্রতিষ্ঠানের নাম):</label>
+                <input type="text" id="cfgName" value="FAIZAN-ENTERPRISE" oninput="liveUpdateBrandMetadata()">
+                
+                <label style="font-weight:bold; font-size:12px;">Slogan Tagline (স্লোগান):</label>
+                <input type="text" id="cfgSlogan" value='"Your Trusted Partner for Commerce & Loyalty"' oninput="liveUpdateBrandMetadata()">
+                
+                <label style="font-weight:bold; font-size:12px;">Footer/Metadata String (ঠিকানা ও ফোন):</label>
+                <input type="text" id="cfgMetadata" value="📍 Kunia-Pasar, TARGAS, Gazipur City Corporation, Dhaka, Bangladesh | 📞 +8801642001334" oninput="liveUpdateBrandMetadata()">
+                
+                <div style="border-top:1px solid #e2e8f0; margin-top:10px; padding-top:10px;">
+                    <label style="font-weight:bold; font-size:12px; color:#ef4444;">Active Promo Header Title (ব্যানার হেডিং):</label>
+                    <input type="text" id="cfgPromoTitle" value="⚡ FRIDAY BIG SALE IS ACTIVE:" oninput="liveUpdateBrandMetadata()">
+                    
+                    <label style="font-weight:bold; font-size:12px; color:#ef4444;">Promo Subtext Description (ব্যানার বিবরণ):</label>
+                    <textarea id="cfgPromoText" oninput="liveUpdateBrandMetadata()">Enjoy exclusive point multipliers & drop shipping markdown rules right now!</textarea>
+                </div>
+                <button class="btn-action" style="background:#1e293b;" onclick="resetBrandMetadataToDefaults()">Reset Default Branding Nodes</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PERSISTENT MOBILE FLOATING CONTROLS FOOTER SHORTCUTS ARRAYS -->
+    <div class="floating-footer">
+        <button class="footer-item active-foot" id="foot-STORE" onclick="switchView('STORE')"><i>🛍</i>Shop</button>
+        <button class="footer-item" id="foot-CART" onclick="switchView('CART')"><i>🛒</i>Bag (<span class="cart-cnt">0</span>)</button>
+        <button class="footer-item" id="foot-LOYALTY" onclick="switchView('LOYALTY')"><i>👑</i>Club</button>
+        <button class="footer-item hidden admin-ui" id="foot-POS" onclick="switchView('POS')"><i>⚙️</i>POS Counter</button>
+    </div>
+
+    <!-- CORE RUNTIME APPLICATION PROGRAM ENGINE CODE -->
+    <script>
+        // Core Volatile Baseline Seed Arrays 
+        const baselineProductsArray = [
+            { id: 2001, name: "Premium Miniket Rice 5kg Bag", price: 340, stock: 95, barcode: "88011223", icon: "🌾" },
+            { id: 2002, name: "Pure Teer Mustard Oil 1L", price: 215, stock: 40, barcode: "88044556", icon: "🍾" },
+            { id: 2003, name: "Confectionery Premium Sugar 1kg", price: 135, stock: 6, barcode: "88077889", icon: "🧂" },
+            { id: 2004, name: "Lux Velvet Touch Soap 100g", price: 75, stock: 12, barcode: "88099001", icon: "🧼" }
+        ];
+
+        const baselineLedgerArray = [
+            { id: 4001, name: "Md Al-Amin (Kunia-Pasar)", phone: "01711000111", markup: 5, balance: 1450 },
+            { id: 4002, name: "Tariqul Islam (Targas)", phone: "01999222333", markup: 8, balance: 0 }
+        ];
+
+        // System State Initializers with Local Persistence Loops
+        let products = JSON.parse(localStorage.getItem('fzn_products')) || baselineProductsArray;
+        let accounts = JSON.parse(localStorage.getItem('fzn_accounts')) || baselineLedgerArray;
+        let brandSettings = JSON.parse(localStorage.getItem('fzn_branding')) || null;
+        
+        let clientCart = [];
+        let executionPosCart = [];
+        let activeInterfaceRole = "CUSTOMER"; 
+        let globalUserContextMode = "CASH"; // Options: CASH or CREDIT
+        let currentActiveCreditUserMarkup = 0;
+        let cameraEngineScannerInstance = null;
+
+        // Save State Synchronizers
+        function synchronizeDatabaseWriteouts() {
+            localStorage.setItem('fzn_products', JSON.stringify(products));
+            localStorage.setItem('fzn_accounts', JSON.stringify(accounts));
+            localStorage.setItem('fzn_branding', JSON.stringify(brandSettings));
+        }
+
+        // Multiview Router Architecture Module
+        function switchView(targetRoute) {
+            document.querySelectorAll('.view-panel').forEach(panel => panel.classList.add('hidden'));
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.footer-item').forEach(foot => foot.classList.remove('active-foot'));
+            
+            const targetPanel = document.getElementById(`panel-${targetRoute}`);
+            const targetTabBtn = document.getElementById(`btn-${targetRoute}`);
+            const targetFootBtn = document.getElementById(`foot-${targetRoute}`);
+            
+            if(targetPanel) targetPanel.classList.remove('hidden');
+            if(targetTabBtn) targetTabBtn.classList.add('active');
+            if(targetFootBtn) targetFootBtn.classList.add('active-foot');
+            
+            // Auto scroll container element back to standard top execution coordinates
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleLanguage() {
+            document.body.classList.toggle('lang-en');
+            document.body.classList.toggle('lang-bn');
+        }
+
+        // Administrative Access Layer Authorization Toggle
+        function togglePlatformRole() {
+            const label = document.getElementById('roleLabel');
+            const switcherBtn = document.getElementById('portalSwitcherBtn');
+            const administrativeUiNodes = document.querySelectorAll('.admin-ui');
+            
